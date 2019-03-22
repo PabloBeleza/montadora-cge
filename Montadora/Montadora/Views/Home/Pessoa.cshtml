@@ -1,0 +1,47 @@
+﻿@model Montadora.Models.Pessoa
+
+@{
+    ViewBag.Title = "Pessoa";
+}
+
+<fieldset>
+    <legend>Pessoa</legend>
+    <div>
+
+        @Html.LabelFor(x => x.Nome)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.Nome)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.CPF)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.CPF)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.Id)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.Id)
+
+    </div>
+    
+    <p><input type="submit" value="Enviar"/></p>
+
+</fieldset>

@@ -1,0 +1,72 @@
+﻿@model Montadora.Models.Cliente
+
+@{
+    ViewBag.Title = "Cliente";
+}
+
+<fieldset>
+
+    <legend>Cliente</legend>
+    <div>
+
+        @Html.LabelFor(x => x.dataNascimento)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.dataNascimento)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.endereco)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.endereco)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.numero)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.numero)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.orgaoExpedidor)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.orgaoExpedidor)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.rg)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.rg)
+
+    </div>
+
+
+
+</fieldset>

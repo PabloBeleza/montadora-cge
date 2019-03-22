@@ -1,0 +1,74 @@
+﻿@model Montadora.Models.Peca
+
+@{
+    ViewBag.Title = "Peça";
+}
+
+<fieldset>
+    <legend>Peça</legend>
+    <div>
+
+        @Html.LabelFor(x => x.dataFabricacao)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.dataFabricacao)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.descricao)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.descricao)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.numeroSerie)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.numeroSerie)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.pecaId)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.pecaId)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.valor)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.valor)
+
+    </div>
+
+    
+    
+    
+
+</fieldset>
+

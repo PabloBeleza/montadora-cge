@@ -1,0 +1,62 @@
+﻿@model Montadora.Models.Veiculo
+@{
+    ViewBag.Title = "Veiculo";
+}
+
+<fieldset>
+    <legend>Veiculo</legend>
+    
+    <div>
+
+        @Html.LabelFor(x => x.categoria)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.categoria)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.marca)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.marca)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.modelo)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.modelo)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.veiculoId)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.veiculoId)
+
+    </div>
+    
+    
+
+</fieldset>
+
+
+

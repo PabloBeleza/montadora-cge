@@ -1,0 +1,48 @@
+﻿@model Montadora.Models.PecadoVeiculo
+
+
+@{
+    ViewBag.Title = "PecadoVeiculo";
+}
+
+<fieldset>
+    <legend>Peça do Veiculo</legend>
+    <div>
+
+        @Html.LabelFor(x => x.desconto)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.desconto)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.pecadoVeiculoId)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.pecadoVeiculoId)
+
+    </div>
+    
+    <div>
+
+        @Html.LabelFor(x => x.quantidade)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.quantidade)
+
+    </div>
+    
+
+</fieldset>
+

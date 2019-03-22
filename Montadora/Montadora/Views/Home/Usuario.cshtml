@@ -1,0 +1,59 @@
+﻿@model Montadora.Models.Usuario
+
+@{
+    ViewBag.Title = "Usuario";
+}
+
+<fieldset>
+    <legend>Usuario</legend>
+    <div>
+
+        @Html.LabelFor(x => x.login)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.login)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.nome)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.nome)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.senha)
+
+    </div>
+
+    <div>
+
+        @Html.PasswordFor(x => x.senha)
+
+    </div>
+
+    <div>
+
+        @Html.LabelFor(x => x.usuarioid)
+
+    </div>
+
+    <div>
+
+        @Html.EditorFor(x => x.usuarioid)
+
+    </div>
+
+
+</fieldset>
+
