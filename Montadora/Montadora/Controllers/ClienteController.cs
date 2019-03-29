@@ -18,6 +18,11 @@ namespace Montadora.Controllers
             return View();
         }
 
+        public ActionResult Update()
+        {
+            return View();
+        }
+
 
     }
 }
