@@ -8,6 +8,20 @@ namespace Montadora.Controllers
 {
     public class PecadoVeiculoController : Controller
     {
-        
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        public ActionResult Update()
+        {
+            return View();
+        }
+
     }
 }
