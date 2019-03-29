@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MontadoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="dataNascimento" Type="date" />
+    <Property Name="Endereco" Type="nvarchar" MaxLength="50" />
+    <Property Name="Numero" Type="nvarchar" MaxLength="50" />
+    <Property Name="orgaoExpedidor" Type="nchar" MaxLength="10" />
+    <Property Name="rg" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Endereco" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Montador">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="salario" Type="money" />
+  </EntityType>
+  <EntityType Name="Peca">
+    <Key>
+      <PropertyRef Name="pecaId" />
+    </Key>
+    <Property Name="pecaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Valor" Type="money" />
+    <Property Name="Descricao" Type="nvarchar" MaxLength="100" />
+    <Property Name="numeroSerie" Type="nchar" MaxLength="50" />
+    <Property Name="dataFabricacao" Type="date" />
+  </EntityType>
+  <EntityType Name="PecadoVeiculo">
+    <Key>
+      <PropertyRef Name="pecadoVeiculo" />
+    </Key>
+    <Property Name="pecadoVeiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Desconto" Type="money" />
+    <Property Name="Quantidade" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" MaxLength="100" />
+    <Property Name="Cpf" Type="numeric" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nchar" MaxLength="100" />
+    <Property Name="Senha" Type="nvarchar" MaxLength="50" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Veiculo">
+    <Key>
+      <PropertyRef Name="VeiculoId" />
+    </Key>
+    <Property Name="VeiculoId" Type="int" Nullable="false" />
+    <Property Name="categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="marca" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="modelo" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="MontadoraModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Montador" EntityType="Self.Montador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Peca" EntityType="Self.Peca" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PecadoVeiculo" EntityType="Self.PecadoVeiculo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Veiculo" EntityType="Self.Veiculo" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

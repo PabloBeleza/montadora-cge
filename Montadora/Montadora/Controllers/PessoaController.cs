@@ -8,10 +8,10 @@ namespace Montadora.Controllers
 {
     public class PessoaController : Controller
     {
-        // GET: Pessoa
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
+
+       
+
+        
     }
 }

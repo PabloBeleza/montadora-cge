@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MontadoraModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="dataNascimento" Type="date" />
+          <Property Name="Endereco" Type="nvarchar" MaxLength="50" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" />
+          <Property Name="orgaoExpedidor" Type="nchar" MaxLength="10" />
+          <Property Name="rg" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Endereco" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Montador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="salario" Type="money" />
+        </EntityType>
+        <EntityType Name="Peca">
+          <Key>
+            <PropertyRef Name="pecaId" />
+          </Key>
+          <Property Name="pecaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valor" Type="money" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="100" />
+          <Property Name="numeroSerie" Type="nchar" MaxLength="50" />
+          <Property Name="dataFabricacao" Type="date" />
+        </EntityType>
+        <EntityType Name="PecadoVeiculo">
+          <Key>
+            <PropertyRef Name="pecadoVeiculo" />
+          </Key>
+          <Property Name="pecadoVeiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desconto" Type="money" />
+          <Property Name="Quantidade" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cpf" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nchar" MaxLength="100" />
+          <Property Name="Senha" Type="nvarchar" MaxLength="50" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Veiculo">
+          <Key>
+            <PropertyRef Name="VeiculoId" />
+          </Key>
+          <Property Name="VeiculoId" Type="int" Nullable="false" />
+          <Property Name="categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="marca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="modelo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MontadoraModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Montador" EntityType="Self.Montador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Peca" EntityType="Self.Peca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PecadoVeiculo" EntityType="Self.PecadoVeiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pessoa" EntityType="Self.Pessoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Veiculo" EntityType="Self.Veiculo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MontadoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pessoa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cpf" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Fornecedors" Relationship="MontadoraModel.FornecedorPessoa" FromRole="Pessoa" ToRole="Fornecedor" />
+          <NavigationProperty Name="Cliente" Relationship="MontadoraModel.ClientePessoa" FromRole="Pessoa" ToRole="Cliente" />
+          <NavigationProperty Name="Montadors" Relationship="MontadoraModel.MontadorPessoa" FromRole="Pessoa" ToRole="Montador" />
+        </EntityType>
+        <EntityContainer Name="MontadoraEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pessoas" EntityType="Self.Pessoa" />
+          <EntitySet Name="Usuarios" EntityType="MontadoraModel.Usuario" />
+          <EntitySet Name="Veiculoes" EntityType="MontadoraModel.Veiculo" />
+          <AssociationSet Name="UsuarioVeiculo" Association="MontadoraModel.UsuarioVeiculo">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+          <EntitySet Name="Clientes" EntityType="MontadoraModel.Cliente" />
+          <EntitySet Name="Pecas" EntityType="MontadoraModel.Peca" />
+          <EntitySet Name="PecadoVeiculoes" EntityType="MontadoraModel.PecadoVeiculo" />
+          <EntitySet Name="Fornecedors" EntityType="MontadoraModel.Fornecedor" />
+          <EntitySet Name="Montadors" EntityType="MontadoraModel.Montador" />
+          <AssociationSet Name="PecadoVeiculoVeiculo" Association="MontadoraModel.PecadoVeiculoVeiculo">
+            <End Role="PecadoVeiculo" EntitySet="PecadoVeiculoes" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="PecaPecadoVeiculo" Association="MontadoraModel.PecaPecadoVeiculo">
+            <End Role="Peca" EntitySet="Pecas" />
+            <End Role="PecadoVeiculo" EntitySet="PecadoVeiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="MontadorVeiculo" Association="MontadoraModel.MontadorVeiculo">
+            <End Role="Montador" EntitySet="Montadors" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="FornecedorPessoa" Association="MontadoraModel.FornecedorPessoa">
+            <End Role="Fornecedor" EntitySet="Fornecedors" />
+            <End Role="Pessoa" EntitySet="Pessoas" />
+          </AssociationSet>
+          <AssociationSet Name="FornecedorPeca" Association="MontadoraModel.FornecedorPeca">
+            <End Role="Fornecedor" EntitySet="Fornecedors" />
+            <End Role="Peca" EntitySet="Pecas" />
+          </AssociationSet>
+          <AssociationSet Name="ClienteVeiculo" Association="MontadoraModel.ClienteVeiculo">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Veiculo" EntitySet="Veiculoes" />
+          </AssociationSet>
+          <AssociationSet Name="ClientePessoa" Association="MontadoraModel.ClientePessoa">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Pessoa" EntitySet="Pessoas" />
+          </AssociationSet>
+          <AssociationSet Name="MontadorPessoa" Association="MontadoraModel.MontadorPessoa">
+            <End Role="Montador" EntitySet="Montadors" />
+            <End Role="Pessoa" EntitySet="Pessoas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Veiculo" Relationship="MontadoraModel.UsuarioVeiculo" FromRole="Usuario" ToRole="Veiculo" />
+        </EntityType>
+        <EntityType Name="Veiculo">
+          <Key>
+            <PropertyRef Name="VeiculoId" />
+          </Key>
+          <Property Name="VeiculoId" Type="Int32" Nullable="false" />
+          <Property Name="categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="MontadoraModel.UsuarioVeiculo" FromRole="Veiculo" ToRole="Usuario" />
+          <NavigationProperty Name="PecadoVeiculo" Relationship="MontadoraModel.PecadoVeiculoVeiculo" FromRole="Veiculo" ToRole="PecadoVeiculo" />
+          <Property Name="PecadoVeiculo_pecadoVeiculo1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Montador" Relationship="MontadoraModel.MontadorVeiculo" FromRole="Veiculo" ToRole="Montador" />
+          <Property Name="MontadorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="MontadoraModel.ClienteVeiculo" FromRole="Veiculo" ToRole="Cliente" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UsuarioVeiculo">
+          <End Type="MontadoraModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="dataNascimento" Type="DateTime" Precision="0" />
+          <Property Name="Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="orgaoExpedidor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="rg" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Veiculoes" Relationship="MontadoraModel.ClienteVeiculo" FromRole="Cliente" ToRole="Veiculo" />
+          <NavigationProperty Name="Pessoa" Relationship="MontadoraModel.ClientePessoa" FromRole="Cliente" ToRole="Pessoa" />
+        </EntityType>
+        <EntityType Name="Peca">
+          <Key>
+            <PropertyRef Name="pecaId" />
+          </Key>
+          <Property Name="pecaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Descricao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="numeroSerie" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="dataFabricacao" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="PecadoVeiculoes" Relationship="MontadoraModel.PecaPecadoVeiculo" FromRole="Peca" ToRole="PecadoVeiculo" />
+          <NavigationProperty Name="Fornecedor" Relationship="MontadoraModel.FornecedorPeca" FromRole="Peca" ToRole="Fornecedor" />
+          <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+          <Property Name="FornecedorId1" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PecadoVeiculo">
+          <Key>
+            <PropertyRef Name="pecadoVeiculo1" />
+          </Key>
+          <Property Name="pecadoVeiculo1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desconto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantidade" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Veiculoes" Relationship="MontadoraModel.PecadoVeiculoVeiculo" FromRole="PecadoVeiculo" ToRole="Veiculo" />
+          <NavigationProperty Name="Peca" Relationship="MontadoraModel.PecaPecadoVeiculo" FromRole="PecadoVeiculo" ToRole="Peca" />
+          <Property Name="Peca_pecaId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pessoas" Relationship="MontadoraModel.FornecedorPessoa" FromRole="Fornecedor" ToRole="Pessoa" />
+          <NavigationProperty Name="Pecas" Relationship="MontadoraModel.FornecedorPeca" FromRole="Fornecedor" ToRole="Peca" />
+        </EntityType>
+        <EntityType Name="Montador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="salario" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Veiculoes" Relationship="MontadoraModel.MontadorVeiculo" FromRole="Montador" ToRole="Veiculo" />
+          <NavigationProperty Name="Pessoas" Relationship="MontadoraModel.MontadorPessoa" FromRole="Montador" ToRole="Pessoa" />
+        </EntityType>
+        <Association Name="PecadoVeiculoVeiculo">
+          <End Type="MontadoraModel.PecadoVeiculo" Role="PecadoVeiculo" Multiplicity="1" />
+          <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PecadoVeiculo">
+              <PropertyRef Name="pecadoVeiculo1" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="PecadoVeiculo_pecadoVeiculo1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PecaPecadoVeiculo">
+          <End Type="MontadoraModel.Peca" Role="Peca" Multiplicity="1" />
+          <End Type="MontadoraModel.PecadoVeiculo" Role="PecadoVeiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Peca">
+              <PropertyRef Name="pecaId" />
+            </Principal>
+            <Dependent Role="PecadoVeiculo">
+              <PropertyRef Name="Peca_pecaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MontadorVeiculo">
+          <End Type="MontadoraModel.Montador" Role="Montador" Multiplicity="1" />
+          <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Montador">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="MontadorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FornecedorPessoa">
+          <End Type="MontadoraModel.Fornecedor" Role="Fornecedor" Multiplicity="*" />
+          <End Type="MontadoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
+        </Association>
+        <Association Name="FornecedorPeca">
+          <End Type="MontadoraModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+          <End Type="MontadoraModel.Peca" Role="Peca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Peca">
+              <PropertyRef Name="FornecedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClienteVeiculo">
+          <End Type="MontadoraModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Veiculo">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientePessoa">
+          <End Type="MontadoraModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="MontadoraModel.Pessoa" Role="Pessoa" Multiplicity="1" />
+        </Association>
+        <Association Name="MontadorPessoa">
+          <End Type="MontadoraModel.Montador" Role="Montador" Multiplicity="*" />
+          <End Type="MontadoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MontadoraModelStoreContainer" CdmEntityContainer="MontadoraEntities">
+          <EntitySetMapping Name="Pessoas">
+            <EntityTypeMapping TypeName="MontadoraModel.Pessoa">
+              <MappingFragment StoreEntitySet="Pessoa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="MontadoraModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Veiculoes">
+            <EntityTypeMapping TypeName="MontadoraModel.Veiculo">
+              <MappingFragment StoreEntitySet="Veiculo">
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="categoria" ColumnName="categoria" />
+                <ScalarProperty Name="VeiculoId" ColumnName="VeiculoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="MontadoraModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="orgaoExpedidor" ColumnName="orgaoExpedidor" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="dataNascimento" ColumnName="dataNascimento" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pecas">
+            <EntityTypeMapping TypeName="MontadoraModel.Peca">
+              <MappingFragment StoreEntitySet="Peca">
+                <ScalarProperty Name="dataFabricacao" ColumnName="dataFabricacao" />
+                <ScalarProperty Name="numeroSerie" ColumnName="numeroSerie" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="pecaId" ColumnName="pecaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PecadoVeiculoes">
+            <EntityTypeMapping TypeName="MontadoraModel.PecadoVeiculo">
+              <MappingFragment StoreEntitySet="PecadoVeiculo">
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="Desconto" ColumnName="Desconto" />
+                <ScalarProperty Name="pecadoVeiculo1" ColumnName="pecadoVeiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fornecedors">
+            <EntityTypeMapping TypeName="MontadoraModel.Fornecedor">
+              <MappingFragment StoreEntitySet="Fornecedor">
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Montadors">
+            <EntityTypeMapping TypeName="MontadoraModel.Montador">
+              <MappingFragment StoreEntitySet="Montador">
+                <ScalarProperty Name="salario" ColumnName="salario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

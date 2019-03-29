@@ -8,10 +8,6 @@ namespace Montadora.Controllers
 {
     public class VeiculoController : Controller
     {
-        // GET: Veiculo
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

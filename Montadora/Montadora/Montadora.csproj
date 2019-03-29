@@ -45,10 +45,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -136,17 +142,52 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Fornecedor.cs" />
-    <Compile Include="Models\Montador.cs" />
-    <Compile Include="Models\Peca.cs" />
-    <Compile Include="Models\PecadoVeiculo.cs" />
-    <Compile Include="Models\Pessoa.cs" />
-    <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Models\Veiculo.cs" />
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fornecedor.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Montador.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MontadoraDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MontadoraDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MontadoraDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MontadoraDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MontadoraDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Peca.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PecadoVeiculo.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pessoa.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Veiculo.cs">
+      <DependentUpon>MontadoraDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Montadora.mdf" />
+    <Content Include="App_Data\Montadora_log.ldf">
+      <DependentUpon>Montadora.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -155,8 +196,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\MontadoraDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MontadoraDB.Context.cs</LastGenOutput>
+      <DependentUpon>MontadoraDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\MontadoraDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MontadoraDB.edmx</DependentUpon>
+      <LastGenOutput>MontadoraDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\MontadoraDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MontadoraDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MontadoraDB.edmx.diagram">
+      <DependentUpon>MontadoraDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -179,17 +237,34 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Pessoa.cshtml" />
-    <Content Include="Views\Home\Cliente.cshtml" />
+    <Content Include="Views\Pessoa\Pessoa.cshtml" />
+    <Content Include="Views\Cliente\Cliente.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Usuario.cshtml" />
-    <Content Include="Views\Home\Peca.cshtml" />
-    <Content Include="Views\Home\PecadoVeiculo.cshtml" />
-    <Content Include="Views\Home\Veiculo.cshtml" />
+    <Content Include="Views\Usuario\Usuario.cshtml" />
+    <Content Include="Views\Peca\Peca.cshtml" />
+    <Content Include="Views\PecadoVeiculo\PecadoVeiculo.cshtml" />
+    <Content Include="Views\Veiculo\Veiculo.cshtml" />
+    <Content Include="Views\Pessoa\Index.cshtml" />
+    <Content Include="Views\Pessoa\Add.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\Add.cshtml" />
+    <Content Include="Views\Cliente\Update.cshtml" />
+    <Content Include="Views\Peca\Index.cshtml" />
+    <Content Include="Views\Peca\Add.cshtml" />
+    <Content Include="Views\Peca\Update.cshtml" />
+    <Content Include="Views\PecadoVeiculo\Index.cshtml" />
+    <Content Include="Views\PecadoVeiculo\Add.cshtml" />
+    <Content Include="Views\PecadoVeiculo\Update.cshtml" />
+    <Content Include="Views\Pessoa\Update.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Add.cshtml" />
+    <Content Include="Views\Usuario\Update.cshtml" />
+    <Content Include="Views\Veiculo\Index.cshtml" />
+    <Content Include="Views\Veiculo\Add.cshtml" />
+    <Content Include="Views\Veiculo\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Views\Cliente\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

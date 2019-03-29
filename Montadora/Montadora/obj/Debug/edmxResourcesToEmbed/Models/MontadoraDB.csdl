@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MontadoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Cpf" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Fornecedors" Relationship="MontadoraModel.FornecedorPessoa" FromRole="Pessoa" ToRole="Fornecedor" />
+    <NavigationProperty Name="Cliente" Relationship="MontadoraModel.ClientePessoa" FromRole="Pessoa" ToRole="Cliente" />
+    <NavigationProperty Name="Montadors" Relationship="MontadoraModel.MontadorPessoa" FromRole="Pessoa" ToRole="Montador" />
+  </EntityType>
+  <EntityContainer Name="MontadoraEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Pessoas" EntityType="Self.Pessoa" />
+    <EntitySet Name="Usuarios" EntityType="MontadoraModel.Usuario" />
+    <EntitySet Name="Veiculoes" EntityType="MontadoraModel.Veiculo" />
+    <AssociationSet Name="UsuarioVeiculo" Association="MontadoraModel.UsuarioVeiculo">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Veiculo" EntitySet="Veiculoes" />
+    </AssociationSet>
+    <EntitySet Name="Clientes" EntityType="MontadoraModel.Cliente" />
+    <EntitySet Name="Pecas" EntityType="MontadoraModel.Peca" />
+    <EntitySet Name="PecadoVeiculoes" EntityType="MontadoraModel.PecadoVeiculo" />
+    <EntitySet Name="Fornecedors" EntityType="MontadoraModel.Fornecedor" />
+    <EntitySet Name="Montadors" EntityType="MontadoraModel.Montador" />
+    <AssociationSet Name="PecadoVeiculoVeiculo" Association="MontadoraModel.PecadoVeiculoVeiculo">
+      <End Role="PecadoVeiculo" EntitySet="PecadoVeiculoes" />
+      <End Role="Veiculo" EntitySet="Veiculoes" />
+    </AssociationSet>
+    <AssociationSet Name="PecaPecadoVeiculo" Association="MontadoraModel.PecaPecadoVeiculo">
+      <End Role="Peca" EntitySet="Pecas" />
+      <End Role="PecadoVeiculo" EntitySet="PecadoVeiculoes" />
+    </AssociationSet>
+    <AssociationSet Name="MontadorVeiculo" Association="MontadoraModel.MontadorVeiculo">
+      <End Role="Montador" EntitySet="Montadors" />
+      <End Role="Veiculo" EntitySet="Veiculoes" />
+    </AssociationSet>
+    <AssociationSet Name="FornecedorPessoa" Association="MontadoraModel.FornecedorPessoa">
+      <End Role="Fornecedor" EntitySet="Fornecedors" />
+      <End Role="Pessoa" EntitySet="Pessoas" />
+    </AssociationSet>
+    <AssociationSet Name="FornecedorPeca" Association="MontadoraModel.FornecedorPeca">
+      <End Role="Fornecedor" EntitySet="Fornecedors" />
+      <End Role="Peca" EntitySet="Pecas" />
+    </AssociationSet>
+    <AssociationSet Name="ClienteVeiculo" Association="MontadoraModel.ClienteVeiculo">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Veiculo" EntitySet="Veiculoes" />
+    </AssociationSet>
+    <AssociationSet Name="ClientePessoa" Association="MontadoraModel.ClientePessoa">
+      <End Role="Cliente" EntitySet="Clientes" />
+      <End Role="Pessoa" EntitySet="Pessoas" />
+    </AssociationSet>
+    <AssociationSet Name="MontadorPessoa" Association="MontadoraModel.MontadorPessoa">
+      <End Role="Montador" EntitySet="Montadors" />
+      <End Role="Pessoa" EntitySet="Pessoas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Veiculo" Relationship="MontadoraModel.UsuarioVeiculo" FromRole="Usuario" ToRole="Veiculo" />
+  </EntityType>
+  <EntityType Name="Veiculo">
+    <Key>
+      <PropertyRef Name="VeiculoId" />
+    </Key>
+    <Property Name="VeiculoId" Type="Int32" Nullable="false" />
+    <Property Name="categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="MontadoraModel.UsuarioVeiculo" FromRole="Veiculo" ToRole="Usuario" />
+    <NavigationProperty Name="PecadoVeiculo" Relationship="MontadoraModel.PecadoVeiculoVeiculo" FromRole="Veiculo" ToRole="PecadoVeiculo" />
+    <Property Name="PecadoVeiculo_pecadoVeiculo1" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Montador" Relationship="MontadoraModel.MontadorVeiculo" FromRole="Veiculo" ToRole="Montador" />
+    <Property Name="MontadorId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="MontadoraModel.ClienteVeiculo" FromRole="Veiculo" ToRole="Cliente" />
+    <Property Name="ClienteId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="UsuarioVeiculo">
+    <End Type="MontadoraModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="1" />
+  </Association>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="dataNascimento" Type="DateTime" Precision="0" />
+    <Property Name="Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="orgaoExpedidor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="rg" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Veiculoes" Relationship="MontadoraModel.ClienteVeiculo" FromRole="Cliente" ToRole="Veiculo" />
+    <NavigationProperty Name="Pessoa" Relationship="MontadoraModel.ClientePessoa" FromRole="Cliente" ToRole="Pessoa" />
+  </EntityType>
+  <EntityType Name="Peca">
+    <Key>
+      <PropertyRef Name="pecaId" />
+    </Key>
+    <Property Name="pecaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Valor" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Descricao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="numeroSerie" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="dataFabricacao" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="PecadoVeiculoes" Relationship="MontadoraModel.PecaPecadoVeiculo" FromRole="Peca" ToRole="PecadoVeiculo" />
+    <NavigationProperty Name="Fornecedor" Relationship="MontadoraModel.FornecedorPeca" FromRole="Peca" ToRole="Fornecedor" />
+    <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+    <Property Name="FornecedorId1" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PecadoVeiculo">
+    <Key>
+      <PropertyRef Name="pecadoVeiculo1" />
+    </Key>
+    <Property Name="pecadoVeiculo1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Desconto" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Quantidade" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Veiculoes" Relationship="MontadoraModel.PecadoVeiculoVeiculo" FromRole="PecadoVeiculo" ToRole="Veiculo" />
+    <NavigationProperty Name="Peca" Relationship="MontadoraModel.PecaPecadoVeiculo" FromRole="PecadoVeiculo" ToRole="Peca" />
+    <Property Name="Peca_pecaId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pessoas" Relationship="MontadoraModel.FornecedorPessoa" FromRole="Fornecedor" ToRole="Pessoa" />
+    <NavigationProperty Name="Pecas" Relationship="MontadoraModel.FornecedorPeca" FromRole="Fornecedor" ToRole="Peca" />
+  </EntityType>
+  <EntityType Name="Montador">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="salario" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Veiculoes" Relationship="MontadoraModel.MontadorVeiculo" FromRole="Montador" ToRole="Veiculo" />
+    <NavigationProperty Name="Pessoas" Relationship="MontadoraModel.MontadorPessoa" FromRole="Montador" ToRole="Pessoa" />
+  </EntityType>
+  <Association Name="PecadoVeiculoVeiculo">
+    <End Type="MontadoraModel.PecadoVeiculo" Role="PecadoVeiculo" Multiplicity="1" />
+    <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PecadoVeiculo">
+        <PropertyRef Name="pecadoVeiculo1" />
+      </Principal>
+      <Dependent Role="Veiculo">
+        <PropertyRef Name="PecadoVeiculo_pecadoVeiculo1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PecaPecadoVeiculo">
+    <End Type="MontadoraModel.Peca" Role="Peca" Multiplicity="1" />
+    <End Type="MontadoraModel.PecadoVeiculo" Role="PecadoVeiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Peca">
+        <PropertyRef Name="pecaId" />
+      </Principal>
+      <Dependent Role="PecadoVeiculo">
+        <PropertyRef Name="Peca_pecaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MontadorVeiculo">
+    <End Type="MontadoraModel.Montador" Role="Montador" Multiplicity="1" />
+    <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Montador">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Veiculo">
+        <PropertyRef Name="MontadorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FornecedorPessoa">
+    <End Type="MontadoraModel.Fornecedor" Role="Fornecedor" Multiplicity="*" />
+    <End Type="MontadoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
+  </Association>
+  <Association Name="FornecedorPeca">
+    <End Type="MontadoraModel.Fornecedor" Role="Fornecedor" Multiplicity="1" />
+    <End Type="MontadoraModel.Peca" Role="Peca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Peca">
+        <PropertyRef Name="FornecedorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClienteVeiculo">
+    <End Type="MontadoraModel.Cliente" Role="Cliente" Multiplicity="1" />
+    <End Type="MontadoraModel.Veiculo" Role="Veiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Veiculo">
+        <PropertyRef Name="ClienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientePessoa">
+    <End Type="MontadoraModel.Cliente" Role="Cliente" Multiplicity="1" />
+    <End Type="MontadoraModel.Pessoa" Role="Pessoa" Multiplicity="1" />
+  </Association>
+  <Association Name="MontadorPessoa">
+    <End Type="MontadoraModel.Montador" Role="Montador" Multiplicity="*" />
+    <End Type="MontadoraModel.Pessoa" Role="Pessoa" Multiplicity="*" />
+  </Association>
+</Schema>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4b5a988bcbef4c61a9f6f28c34b6b816" Name="Diagram1">
+        <EntityTypeShape EntityType="MontadoraModel.Pessoa" Width="1.5" PointX="5.375" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MontadoraModel.Usuario" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MontadoraModel.Veiculo" Width="1.5" PointX="2.875" PointY="0.5" />
+        <AssociationConnector Association="MontadoraModel.UsuarioVeiculo" />
+        <EntityTypeShape EntityType="MontadoraModel.Cliente" Width="1.5" PointX="0.5" PointY="3.625" />
+        <EntityTypeShape EntityType="MontadoraModel.Peca" Width="1.5" PointX="8" PointY="0.5" />
+        <EntityTypeShape EntityType="MontadoraModel.PecadoVeiculo" Width="1.5" PointX="5.375" PointY="0.625" />
+        <EntityTypeShape EntityType="MontadoraModel.Fornecedor" Width="1.5" PointX="8.375" PointY="4.25" />
+        <EntityTypeShape EntityType="MontadoraModel.Montador" Width="1.5" PointX="2.75" PointY="4.375" />
+        <AssociationConnector Association="MontadoraModel.PecadoVeiculoVeiculo" />
+        <AssociationConnector Association="MontadoraModel.PecaPecadoVeiculo" />
+        <AssociationConnector Association="MontadoraModel.MontadorVeiculo" />
+        <AssociationConnector Association="MontadoraModel.FornecedorPessoa" />
+        <AssociationConnector Association="MontadoraModel.FornecedorPeca" />
+        <AssociationConnector Association="MontadoraModel.ClienteVeiculo" />
+        <AssociationConnector Association="MontadoraModel.ClientePessoa" />
+        <AssociationConnector Association="MontadoraModel.MontadorPessoa" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
