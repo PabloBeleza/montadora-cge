@@ -8,6 +8,19 @@ namespace Montadora.Controllers
 {
     public class VeiculoController : Controller
     {
-        
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        public ActionResult Update()
+        {
+            return View();
+        }
     }
 }
