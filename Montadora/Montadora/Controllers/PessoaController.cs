@@ -8,10 +8,9 @@ namespace Montadora.Controllers
 {
     public class PessoaController : Controller
     {
-        
-
-       
-
-        
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }
